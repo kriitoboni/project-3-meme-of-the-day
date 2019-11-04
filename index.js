@@ -1,18 +1,27 @@
-fetch('https://api.imgflip.com/get_memes')
-  .then(response => {
-    if (response.ok){
-      console.log('Successful request!')
-    } else {
-      console.log('Oops, we got an error ${STATUS_CODE}')
-    }
-    return response.json()
-    })
-  .then(body => body.data.memes)
-  .then(memes => memes.map(meme => {
+import { getMemes, ENDPOINT } from "./api.js";
+
+function mapper(memes){
+  const memesM = memes.map(meme => {
     const { id, name, width, height, url } = meme;
     return { id, name, width, height, url };
-           }))
-  .then(memesSorted => (memesSorted.filter(meme => meme.width < 500 || meme.height < 500)).sort((a, b) => parseInt(a.id) + parseInt(b.id)))
-  .then(memesSorted => console.log(memesSorted))
-  .catch(err => console.error(err.message));
+           });
+  return memesM
+}
+
+function filterr(memesM){
+  const memesF = memesM.filter(meme => meme.width < 500 || meme.height < 500);
+  return memesF;
+}
+
+function sortt(memesF){
+  const memesSorted = memesF.sort((a, b) => parseInt(a.id) + parseInt(b.id));
+  return memesSorted;
+}
+
+getMemes(ENDPOINT)
+  .then(mapper(memes))
+  .then(filterr(memes))
+  .then(sortt(memes))
+  .then(memesSorted => console.log(memesSorted));
+
 
