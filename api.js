@@ -1,5 +1,5 @@
-//antes getMemesData
-export function getMemes(url){
+
+export function getMemesData(url){
     return fetch(url)
         .then(response => {
             if (response.ok) {
