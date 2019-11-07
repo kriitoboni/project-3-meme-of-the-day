@@ -1,5 +1,5 @@
-export function getMemesData(URL){
-    return fetch(URL)
+export function getMemesData(url){
+    return fetch(url)
         .then(response => {
             if (response.ok) {
                 console.log('Successful request!')
@@ -12,6 +12,3 @@ export function getMemesData(URL){
 }
 
 export const ENDPOINT = "https://api.imgflip.com/get_memes";
-
-
-
