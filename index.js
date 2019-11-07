@@ -9,18 +9,17 @@ function getMemeOfTheDay(memes) {
 
 
 
-//function getMemes(url){
-  //return
-  //getMemesData(url) 
-getMemes(ENDPOINT)
+function getMemes(url){
+  return getMemesData(url) 
         .then(memes => memes
                       .map(format)
                       .filter(meme => biggerThan(meme, 500))
                       .sort(ascendingById))
         .then(memes => {const memeOfTheDay = getMemeOfTheDay(memes);
-                       
+                                memeImg =  {
+            "src": memeOfTheDay.url,
+            "alt": memeOfTheDay.name
+        };              
         })
         .catch(err => console.error(err.message));
   //}
-
-
