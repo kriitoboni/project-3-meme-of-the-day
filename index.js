@@ -7,8 +7,7 @@ function getMemeOfTheDay(memes) {
   return memes[todayDate - 1];
 }
 
-
-
+let memeImg = {};
 function getMemes(url){
   return getMemesData(url) 
         .then(memes => memes
@@ -22,4 +21,4 @@ function getMemes(url){
         };              
         })
         .catch(err => console.error(err.message));
-  //}
+  }

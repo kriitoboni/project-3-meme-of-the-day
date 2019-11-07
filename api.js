@@ -1,4 +1,3 @@
-
 export function getMemesData(url){
     return fetch(url)
         .then(response => {
@@ -13,8 +12,3 @@ export function getMemesData(url){
 }
 
 export const ENDPOINT = "https://api.imgflip.com/get_memes";
-
-
-
-
-
