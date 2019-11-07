@@ -1,19 +1,19 @@
-export function getMemes(URL){
-    return fetch(URL)
+//antes getMemesData
+export function getMemes(url){
+    return fetch(url)
         .then(response => {
-            if (response.ok){
+            if (response.ok) {
                 console.log('Successful request!')
             } else {
-                console.log('Oops, we got an error ${STATUS_CODE}')
+                console.log('Oops, we got an error ${response.satus}')
             }
             return response.json()
             })
         .then(body => body.data.memes)
-        .catch(err => console.error(err.message));
-    return memes;
 }
 
 export const ENDPOINT = "https://api.imgflip.com/get_memes";
+
 
 
 

@@ -1,27 +1,26 @@
-import { getMemes, ENDPOINT } from "./api.js";
+import { getMemesData, ENDPOINT } from "./api.js";
 
-function mapper(memes){
-  const memesM = memes.map(meme => {
-    const { id, name, width, height, url } = meme;
-    return { id, name, width, height, url };
-           });
-  return memesM
+import { format, biggerThan, ascendingById } from "./utils.js";
+
+function getMemeOfTheDay(memes) {
+  const todayDate = new Date().getDate();
+  return memes[todayDate - 1];
 }
 
-function filterr(memesM){
-  const memesF = memesM.filter(meme => meme.width < 500 || meme.height < 500);
-  return memesF;
-}
 
-function sortt(memesF){
-  const memesSorted = memesF.sort((a, b) => parseInt(a.id) + parseInt(b.id));
-  return memesSorted;
-}
 
+//function getMemes(url){
+  //return
+  //getMemesData(url) 
 getMemes(ENDPOINT)
-  .then(mapper(memes))
-  .then(filterr(memes))
-  .then(sortt(memes))
-  .then(memesSorted => console.log(memesSorted));
+        .then(memes => memes
+                      .map(format)
+                      .filter(meme => biggerThan(meme, 500))
+                      .sort(ascendingById))
+        .then(memes => {const memeOfTheDay = getMemeOfTheDay(memes);
+                       
+        })
+        .catch(err => console.error(err.message));
+  //}
 
 
